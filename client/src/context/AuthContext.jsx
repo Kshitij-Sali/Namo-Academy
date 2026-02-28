@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const { data } = await http.post("/auth/login", { email, password });
+    const { data } = await http.post("/api/auth/login", { email, password });
     setToken(data.token);
     setAdmin(data.admin);
     localStorage.setItem(TOKEN_KEY, data.token);
