@@ -12,7 +12,9 @@ const AuthProvider = ({ children }) => {
     const cached = localStorage.getItem(ADMIN_KEY);
     return cached ? JSON.parse(cached) : null;
   });
-  const [loading, setLoading] = useState(Boolean(localStorage.getItem(TOKEN_KEY)));
+  const [loading, setLoading] = useState(
+    Boolean(localStorage.getItem(TOKEN_KEY))
+  );
 
   useEffect(() => {
     const validateSession = async () => {
@@ -26,6 +28,7 @@ const AuthProvider = ({ children }) => {
         setAdmin(data.admin);
         localStorage.setItem(ADMIN_KEY, JSON.stringify(data.admin));
       } catch (error) {
+        // Token invalid / expired
         setToken(null);
         setAdmin(null);
         localStorage.removeItem(TOKEN_KEY);
@@ -39,7 +42,8 @@ const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const { data } = await http.post("/api/auth/login", { email, password });
+    const { data } = await http.post("/auth/login", { email, password });
+
     setToken(data.token);
     setAdmin(data.admin);
     localStorage.setItem(TOKEN_KEY, data.token);
@@ -65,7 +69,11 @@ const AuthProvider = ({ children }) => {
     [token, admin, loading]
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 const useAuth = () => {
