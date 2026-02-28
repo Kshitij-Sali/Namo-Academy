@@ -129,12 +129,12 @@ const HomePage = () => {
       </section>
 
       <section className="section-shell mt-20">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">Programs</p>
             <h2 className="mt-2 text-3xl font-bold text-slate-900">Courses Built for Real Results</h2>
           </div>
-          <Link to="/courses" className="btn-outline hidden md:inline-flex">
+          <Link to="/courses" className="btn-outline inline-flex self-start sm:self-auto">
             View All Courses
           </Link>
         </div>
@@ -165,12 +165,12 @@ const HomePage = () => {
       </section>
 
       <section className="section-shell mt-20">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="text-3xl font-bold text-slate-900">Student Testimonials</h2>
           <button
             type="button"
             onClick={() => setShowTestimonialForm((prev) => !prev)}
-            className="btn-outline hidden md:inline-flex"
+            className="btn-outline inline-flex self-start sm:self-auto"
           >
             {showTestimonialForm ? "Close" : "Add Testimonial"}
           </button>
